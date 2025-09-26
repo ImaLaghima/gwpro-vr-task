@@ -15,8 +15,8 @@ namespace VRTask.Crane.InputProvider
         protected bool IsLogging => _isLogging;
 
 
-        private event Action<CraneAction>? OnActionStarted;
-        private event Action<CraneAction>? OnActionStopped;
+        public event Action<CraneAction>? OnActionStarted;
+        public event Action<CraneAction>? OnActionStopped;
 
 
         private void OnDisable()
