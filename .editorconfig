@@ -1,0 +1,245 @@
+root = true
+
+
+[*.cs]
+
+
+charset = utf-8
+
+
+########################################  
+# Line margins and length  
+########################################  
+indent_style = space
+indent_size = 4
+tab_width = 4
+end_of_line = crlf
+insert_final_newline = true
+trim_trailing_whitespace = true
+max_line_length = 120
+
+
+########################################  
+# Brackets and code blocks  
+########################################  
+csharp_new_line_before_open_brace = all:warning
+csharp_new_line_between_query_expression_clauses = true:warning
+
+
+########################################  
+# Spaces  
+########################################  
+csharp_space_after_cast = false
+csharp_space_after_keywords_in_control_flow_statements = true
+csharp_space_between_method_declaration_parameter_list_parentheses = false
+csharp_space_between_method_call_parameter_list_parentheses = false
+csharp_space_between_parentheses = false:warning
+csharp_space_after_comma = true
+csharp_space_after_dot = false:warning
+csharp_space_after_semicolon_in_for_statement = true
+csharp_space_around_binary_operators = before_and_after:warning
+
+
+########################################  
+# Formatting  
+########################################  
+csharp_style_prefer_switch_expression = true:warning
+csharp_style_pattern_matching_over_is_with_cast_check = true:warning
+csharp_style_pattern_matching_over_as_with_null_check = true:warning
+
+
+########################################  
+# var  
+########################################  
+csharp_style_var_for_built_in_types = false:warning
+csharp_style_var_when_type_is_apparent = true:warning
+csharp_style_var_elsewhere = false:warning
+
+
+########################################  
+# this.  
+########################################  
+dotnet_style_qualification_for_field = false:warning
+dotnet_style_qualification_for_property = false:warning
+dotnet_style_qualification_for_method = false:warning
+dotnet_style_qualification_for_event = false:warning
+
+
+########################################  
+# Expression-bodied members  
+########################################  
+csharp_style_expression_bodied_methods = never:warning
+csharp_style_expression_bodied_properties = when_on_single_line:warning
+csharp_style_expression_bodied_indexers = when_on_single_line:warning
+csharp_style_expression_bodied_accessors = when_on_single_line:warning
+
+
+########################################  
+# Naming Style-s  
+########################################  
+dotnet_naming_style.underscore_style.required_prefix = _
+dotnet_naming_style.underscore_style.required_suffix =
+dotnet_naming_style.underscore_style.word_separator =
+dotnet_naming_style.underscore_style.capitalization = camel_case
+
+dotnet_naming_style.serialized_style.required_prefix = _
+dotnet_naming_style.serialized_style.required_suffix =
+dotnet_naming_style.serialized_style.word_separator =
+dotnet_naming_style.serialized_style.capitalization = camel_case
+
+dotnet_naming_style.pascal_style.required_prefix =
+dotnet_naming_style.pascal_style.required_suffix =
+dotnet_naming_style.pascal_style.word_separator =
+dotnet_naming_style.pascal_style.capitalization = pascal_case
+
+dotnet_naming_style.i_prefix_pascal.required_prefix = I
+dotnet_naming_style.i_prefix_pascal.required_suffix =
+dotnet_naming_style.i_prefix_pascal.word_separator =
+dotnet_naming_style.i_prefix_pascal.capitalization = pascal_case
+
+dotnet_naming_style.end_with_async.required_prefix =
+dotnet_naming_style.end_with_async.required_suffix = Async
+dotnet_naming_style.end_with_async.word_separator =
+dotnet_naming_style.end_with_async.capitalization = pascal_case
+
+dotnet_naming_style.on_pascal_event.required_prefix = On
+dotnet_naming_style.on_pascal_event.required_suffix = ed
+dotnet_naming_style.on_pascal_event.word_separator =
+dotnet_naming_style.on_pascal_event.capitalization = pascal_case
+
+dotnet_naming_style.private_on_pascal_event.required_prefix = _On
+dotnet_naming_style.private_on_pascal_event.required_suffix = ed
+dotnet_naming_style.private_on_pascal_event.word_separator =
+dotnet_naming_style.private_on_pascal_event.capitalization = pascal_case
+
+
+########################################  
+# Naming: Constants  
+########################################  
+dotnet_naming_rule.constants_should_be_pascal.severity = warning
+dotnet_naming_rule.constants_should_be_pascal.symbols = constants
+dotnet_naming_rule.constants_should_be_pascal.style = pascal_style
+
+dotnet_naming_symbols.constants.applicable_kinds = field
+dotnet_naming_symbols.constants.required_modifiers = const
+dotnet_naming_symbols.constants.applicable_accessibilities = *
+
+
+########################################  
+# Naming: Fields  
+########################################  
+dotnet_naming_rule.private_fields_should_be_underscored.severity = warning
+dotnet_naming_rule.private_fields_should_be_underscored.symbols = private_fields
+dotnet_naming_rule.private_fields_should_be_underscored.style = underscore_style
+
+dotnet_naming_symbols.private_fields.applicable_kinds = field
+dotnet_naming_symbols.private_fields.applicable_accessibilities = private, protected
+dotnet_naming_symbols.private_fields.required_modifiers =
+
+
+########################################  
+# Naming: SerializedFields  
+########################################  
+dotnet_naming_rule.serialized_fields_should_be_camel.severity = warning
+dotnet_naming_rule.serialized_fields_should_be_camel.symbols = serialized_fields
+dotnet_naming_rule.serialized_fields_should_be_camel.style = serialized_style
+
+dotnet_naming_symbols.serialized_fields.applicable_kinds = field
+dotnet_naming_symbols.serialized_fields.applicable_accessibilities = private
+dotnet_naming_symbols.serialized_fields.required_modifiers =
+
+
+########################################  
+# Naming: Public Members  
+########################################  
+dotnet_naming_rule.public_members_should_be_pascal.severity = warning
+dotnet_naming_rule.public_members_should_be_pascal.symbols = public_members
+dotnet_naming_rule.public_members_should_be_pascal.style = pascal_style
+
+dotnet_naming_symbols.public_members.applicable_kinds = property, method, event, field
+dotnet_naming_symbols.public_members.applicable_accessibilities = public
+dotnet_naming_symbols.public_members.required_modifiers =
+
+
+########################################  
+# Naming: Public Events  
+########################################  
+dotnet_naming_rule.public_events_should_start_on_and_end_ed.severity = warning
+dotnet_naming_rule.public_events_should_start_on_and_end_ed.symbols = public_events
+dotnet_naming_rule.public_events_should_start_on_and_end_ed.style = on_pascal_event
+
+dotnet_naming_symbols.public_events.applicable_kinds = event
+dotnet_naming_symbols.public_events.applicable_accessibilities = public
+
+
+########################################  
+# Naming: Private Events  
+########################################  
+dotnet_naming_rule.private_events_should_start__on_and_end_ed.severity = warning
+dotnet_naming_rule.private_events_should_start__on_and_end_ed.symbols = private_events
+dotnet_naming_rule.private_events_should_start__on_and_end_ed.style = private_on_pascal_event
+
+dotnet_naming_symbols.private_events.applicable_kinds = event
+dotnet_naming_symbols.private_events.applicable_accessibilities = private, protected
+
+
+########################################  
+# Naming: Interfaces  
+########################################  
+dotnet_naming_rule.interfaces_should_start_with_i.severity = warning
+dotnet_naming_rule.interfaces_should_start_with_i.symbols = interfaces
+dotnet_naming_rule.interfaces_should_start_with_i.style = i_prefix_pascal
+
+dotnet_naming_symbols.interfaces.applicable_kinds = interface
+dotnet_naming_symbols.interfaces.applicable_accessibilities = public, internal, private, protected
+dotnet_naming_symbols.interfaces.required_modifiers =
+
+
+########################################  
+# Naming: Enums and their members  
+########################################  
+dotnet_naming_rule.enums_should_be_pascal.severity = warning
+dotnet_naming_rule.enums_should_be_pascal.symbols = enums
+dotnet_naming_rule.enums_should_be_pascal.style = pascal_style
+
+dotnet_naming_symbols.enums.applicable_kinds = enum
+dotnet_naming_symbols.enums.applicable_accessibilities = *
+dotnet_naming_symbols.enums.required_modifiers =
+
+
+########################################  
+# Naming: Async Methods  
+########################################  
+dotnet_naming_rule.async_methods_should_end_with_async.severity = warning
+dotnet_naming_rule.async_methods_should_end_with_async.symbols = async_methods
+dotnet_naming_rule.async_methods_should_end_with_async.style = end_with_async
+
+dotnet_naming_symbols.async_methods.applicable_kinds = method
+dotnet_naming_symbols.async_methods.applicable_accessibilities = *
+dotnet_naming_symbols.async_methods.required_modifiers = async
+
+
+########################################  
+# using  
+########################################  
+dotnet_sort_system_directives_first = true
+dotnet_separate_import_directive_groups = true
+
+
+########################################  
+# namespace  
+########################################  
+csharp_style_namespace_declarations = file_scoped:warning
+
+
+[*.meta]
+
+indent_style = space
+indent_size = 2
+insert_final_newline = false
+trim_trailing_whitespace = false
+
+
+[*.generated.cs]
+
+generated_code = true
