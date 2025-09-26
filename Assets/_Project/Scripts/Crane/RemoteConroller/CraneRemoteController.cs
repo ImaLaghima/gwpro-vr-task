@@ -12,7 +12,7 @@ namespace VRTask.Crane.RemoteController
         private bool _isLogging = true;
 
         [SerializeField]
-        private InputProviderBase? _inputProvider;
+        private InputProviderBase _inputProvider = null!;
 
 
         public bool IsLogging => _isLogging;
@@ -46,26 +46,20 @@ namespace VRTask.Crane.RemoteController
 
         private void Awake()
         {
-            if (_inputProvider == null)
-            {
-                Debug.LogWarning("[CraneRemoteController]: Input Provider not found");
-            }
+            Debug.Assert(
+                _inputProvider != null,
+                "[CraneRemoteController]: InputProvider reference is missing!"
+            );
         }
 
         private void OnEnable()
         {
-            if (_inputProvider != null)
-            {
-                _inputProvider.OnActionStarted += HandleInputEvent;
-            }
+            _inputProvider.OnActionStarted += HandleInputEvent;
         }
 
         private void OnDisable()
         {
-            if (_inputProvider != null)
-            {
-                _inputProvider.OnActionStarted -= HandleInputEvent;
-            }
+            _inputProvider.OnActionStarted -= HandleInputEvent;
         }
 
 
