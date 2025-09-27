@@ -29,6 +29,15 @@ namespace VRTask.Crane.Controller
         [SerializeField]
         private GameObject _beamObject = null!;
 
+        [SerializeField]
+        private GameObject _beamMoveConstraintMin = null!;
+
+        [SerializeField]
+        private GameObject _beamMoveConstraintMax = null!;
+
+        [SerializeField]
+        private float _beamMoveSpeed = 3.7f;
+
         [Header("Hook")]
         [SerializeField]
         private GameObject _hookObject = null!;
@@ -81,12 +90,12 @@ namespace VRTask.Crane.Controller
 
         private void HandleWest()
         {
-
+            _moveDirection = Vector3.right;
         }
 
         private void HandleEast()
         {
-
+            _moveDirection = Vector3.left;
         }
 
         private void HandleNorth()
@@ -132,6 +141,16 @@ namespace VRTask.Crane.Controller
             );
 
             Debug.Assert(
+                _beamMoveConstraintMin != null,
+                "[CraneController] Beam's MoveConstraintMin reference is missing!"
+            );
+
+            Debug.Assert(
+                _beamMoveConstraintMax != null,
+                "[CraneController] Beam's MoveConstraintMax reference is missing!"
+            );
+
+            Debug.Assert(
                 _hookObject != null,
                 "[CraneController] CraneHook reference is missing!"
             );
@@ -154,6 +173,19 @@ namespace VRTask.Crane.Controller
                     _bhObject.transform.position.x,
                     _bhObject.transform.position.y,
                     clampedPositionZ
+                );
+
+                float nextPositionX = _beamObject.transform.position.x +
+                                      (_beamMoveSpeed * Time.deltaTime * _moveDirection.x);
+                float clampedPositionX = Mathf.Clamp(
+                    nextPositionX,
+                    _beamMoveConstraintMin.transform.position.x,
+                    _beamMoveConstraintMax.transform.position.x
+                );
+                _beamObject.transform.position = new Vector3(
+                    clampedPositionX,
+                    _beamObject.transform.position.y,
+                    _beamObject.transform.position.z
                 );
                 yield return null;
             }
