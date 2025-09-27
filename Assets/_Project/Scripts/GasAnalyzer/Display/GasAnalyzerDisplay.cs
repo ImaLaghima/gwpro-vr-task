@@ -43,5 +43,29 @@ namespace VRTask.GasAnalyzer.Display
                 CultureInfo.CurrentCulture
             );
         }
+
+
+        private void AssertInspectorRefsNotNull()
+        {
+            Debug.Assert(
+                _dangerZonesDetectedText != null,
+                "[GasAnalyzerDisplay] DangerZonesDetected Text reference is missing"
+            );
+
+            Debug.Assert(
+                _nearDangerZoneSizeText != null,
+                "[GasAnalyzerDisplay] Near DangerZone Size reference is missing"
+            );
+
+            Debug.Assert(
+                _nearDangerZoneIdText != null,
+                "[GasAnalyzerDisplay] Near DangerZone ID reference is missing"
+            );
+
+            Debug.Assert(
+                _nearDangerZoneDistanceText != null,
+                "[GasAnalyzerDisplay] Near DangerZone Distance reference is missing"
+            );
+        }
     }
 }
