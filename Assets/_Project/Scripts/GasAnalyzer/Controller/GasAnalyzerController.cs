@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using VRTask.GasAnalyzer.DangerZone;
+using VRTask.GasAnalyzer.Display;
 using VRTask.GasAnalyzer.Probe;
 
 namespace VRTask.GasAnalyzer.Controller
@@ -15,6 +16,9 @@ namespace VRTask.GasAnalyzer.Controller
 
         [SerializeField]
         private ProbeBehavior _probeBehavior = null!;
+
+        [SerializeField]
+        private GasAnalyzerDisplay _display = null!;
 
 
         public bool IsLogging => _isLogging;
@@ -31,6 +35,11 @@ namespace VRTask.GasAnalyzer.Controller
             Debug.Assert(
                 _probeBehavior != null,
                 "[GasAnalyzerController] Probe Behavior reference is missing!"
+            );
+
+            Debug.Assert(
+                _display != null,
+                "[GasAnalyzerController] Display reference is missing!"
             );
         }
 
@@ -66,7 +75,12 @@ namespace VRTask.GasAnalyzer.Controller
 
                 if (nearestDangerZone.HasValue)
                 {
-                    // refresh display
+                    _display.UpdateInfo(
+                        zonesCount: dangerZones.Count,
+                        nearZoneSize: nearestDangerZone.Value.Key.Size,
+                        nearZoneId: nearestDangerZone.Value.Key.Id,
+                        nearZoneDistance: nearestDangerZone.Value.Value
+                    );
                 }
 
                 yield return null;
