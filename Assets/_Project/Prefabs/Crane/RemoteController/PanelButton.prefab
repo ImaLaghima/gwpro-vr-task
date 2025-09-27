@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 246368380261302626}
   - component: {fileID: 1200188885969056343}
   m_Layer: 0
-  m_Name: RemoteControllerButton
+  m_Name: PanelButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -29,8 +29,8 @@ Transform:
   m_GameObject: {fileID: 3633612273277281106}
   serializedVersion: 2
   m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0.024, y: 0.374, z: -0.8409}
-  m_LocalScale: {x: 0.3267345, y: 0.08583956, z: 0.13948566}
+  m_LocalPosition: {x: 0.024, y: 0.374, z: -0.9037}
+  m_LocalScale: {x: 0.3267345, y: 0.14860545, z: 0.13948566}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}

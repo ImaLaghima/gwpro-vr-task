@@ -3,12 +3,12 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using VRTask.Crane.Common;
 
-namespace VRTask.Crane.RemoteController
+namespace VRTask.Crane.InputProvider
 {
-    public class RemoteControllerButton
+    public class PanelButton
         : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
     {
-        [Header("Remote Controller Button")]
+        [Header("Panel Button")]
         [SerializeField]
         private bool _isLogging = true;
         [Space]
@@ -40,7 +40,7 @@ namespace VRTask.Crane.RemoteController
         {
             if (IsLogging)
             {
-                Debug.Log($"[RemoteControllerButton] {message}");
+                Debug.Log($"[PanelButton] {message}");
             }
         }
     }

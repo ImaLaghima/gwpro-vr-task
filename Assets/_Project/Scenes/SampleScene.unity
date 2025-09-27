@@ -450,7 +450,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7436194404818230373, guid: e1ae71b3ef657324bb152b0da6c16378, type: 3}
       propertyPath: m_Name
-      value: RemoteControllerButton_North
+      value: PanelButton_North
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -512,7 +512,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8426278512589070519, guid: 021476d56b0e5fc4599eda953e780034, type: 3}
       propertyPath: m_Name
-      value: RemoteControllerButton_East
+      value: PanelButton_East
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -574,7 +574,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7140012756997811070, guid: 3d01e560fe68aa94882dd69a435f119a, type: 3}
       propertyPath: m_Name
-      value: RemoteControllerButton_Down
+      value: PanelButton_Down
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -636,7 +636,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3767277181082391144, guid: 90305614cbcab2743b6cd3fb3bc56c4e, type: 3}
       propertyPath: m_Name
-      value: RemoteControllerButton_South
+      value: PanelButton_South
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -735,7 +735,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8426278512589070519, guid: 01ed1ee7eae89b0489165c7e5939fc85, type: 3}
       propertyPath: m_Name
-      value: RemoteControllerButton_West
+      value: PanelButton_West
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -806,7 +806,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 6694882239692243544, guid: f52b3ee83e695ae478eaf43a22a90744, type: 3}
       propertyPath: m_Name
-      value: RemoteControllerButton_Up
+      value: PanelButton_Up
       objectReference: {fileID: 0}
     - target: {fileID: 7832628599270307613, guid: f52b3ee83e695ae478eaf43a22a90744, type: 3}
       propertyPath: m_LocalPosition.x
@@ -947,7 +947,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1902674247}
   m_Layer: 0
-  m_Name: RemoteController
+  m_Name: CranePanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1242,10 +1242,6 @@ PrefabInstance:
     - target: {fileID: 3016578581563310073, guid: 10906da09ebe1404fbdb043b14faaaed, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4337885782575209411, guid: 10906da09ebe1404fbdb043b14faaaed, type: 3}
-      propertyPath: _beamMoveSpeed
-      value: 31.7
       objectReference: {fileID: 0}
     - target: {fileID: 4878825411619302990, guid: 10906da09ebe1404fbdb043b14faaaed, type: 3}
       propertyPath: m_Name

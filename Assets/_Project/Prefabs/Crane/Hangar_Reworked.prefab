@@ -3807,7 +3807,7 @@ MonoBehaviour:
   _beamObject: {fileID: 7823166408624578239}
   _beamMoveConstraintMin: {fileID: 8705242387166409692}
   _beamMoveConstraintMax: {fileID: 6955643005971235689}
-  _beamMoveSpeed: 13.7
+  _beamMoveSpeed: 31.7
   _hookObject: {fileID: 3221386154669873691}
   _hookMoveConstraintMin: {fileID: 8026523627256727300}
   _hookMoveConstraintMax: {fileID: 2130772268018114631}
