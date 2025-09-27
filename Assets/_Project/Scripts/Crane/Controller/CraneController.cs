@@ -202,17 +202,17 @@ namespace VRTask.Crane.Controller
                     clampedPositionZ
                 );
 
-                float nextPositionX = _beamObject.transform.position.x +
+                float nextPositionX = _beamObject.transform.localPosition.x +
                                       (_beamMoveSpeed * Time.deltaTime * _moveDirection.x);
                 float clampedPositionX = Mathf.Clamp(
                     nextPositionX,
-                    _beamMoveConstraintMin.transform.position.x,
-                    _beamMoveConstraintMax.transform.position.x
+                    _beamMoveConstraintMin.transform.localPosition.x,
+                    _beamMoveConstraintMax.transform.localPosition.x
                 );
-                _beamObject.transform.position = new Vector3(
+                _beamObject.transform.localPosition = new Vector3(
                     clampedPositionX,
-                    _beamObject.transform.position.y,
-                    _beamObject.transform.position.z
+                    _beamObject.transform.localPosition.y,
+                    _beamObject.transform.localPosition.z
                 );
 
                 float nextPositionY = _hookObject.transform.position.y +
