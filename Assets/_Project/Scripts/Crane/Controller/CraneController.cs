@@ -215,17 +215,17 @@ namespace VRTask.Crane.Controller
                     _beamObject.transform.localPosition.z
                 );
 
-                float nextPositionY = _hookObject.transform.position.y +
+                float nextPositionY = _hookObject.transform.localPosition.y +
                                       (_hookMoveSpeed * Time.deltaTime * _moveDirection.y);
                 float clampedPositionY = Mathf.Clamp(
                     nextPositionY,
-                    _hookMoveConstraintMin.transform.position.y,
-                    _hookMoveConstraintMax.transform.position.y
+                    _hookMoveConstraintMin.transform.localPosition.y,
+                    _hookMoveConstraintMax.transform.localPosition.y
                 );
-                _hookObject.transform.position = new Vector3(
-                    _hookObject.transform.position.x,
+                _hookObject.transform.localPosition = new Vector3(
+                    _hookObject.transform.localPosition.x,
                     clampedPositionY,
-                    _hookObject.transform.position.z
+                    _hookObject.transform.localPosition.z
                 );
 
                 _hookWireObject.transform.position = Vector3.Lerp(
