@@ -189,16 +189,16 @@ namespace VRTask.Crane.Controller
             // TODO: fix coroutine: prevent infinite work
             while (true)
             {
-                float nextPositionZ = _bhObject.transform.position.z +
+                float nextPositionZ = _bhObject.transform.localPosition.z +
                                      (_bhMoveSpeed * Time.deltaTime * _moveDirection.z);
                 float clampedPositionZ = Mathf.Clamp(
                     nextPositionZ,
-                    _bhMoveConstraintMin.transform.position.z,
-                    _bhMoveConstraintMax.transform.position.z
+                    _bhMoveConstraintMin.transform.localPosition.z,
+                    _bhMoveConstraintMax.transform.localPosition.z
                 );
-                _bhObject.transform.position = new Vector3(
-                    _bhObject.transform.position.x,
-                    _bhObject.transform.position.y,
+                _bhObject.transform.localPosition = new Vector3(
+                    _bhObject.transform.localPosition.x,
+                    _bhObject.transform.localPosition.y,
                     clampedPositionZ
                 );
 
