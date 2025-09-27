@@ -35,6 +35,18 @@ namespace VRTask.Crane.InputProvider
             Log($"Event.{nameof(OnPointerUp)}");
         }
 
+        public void SimulatePointerDown()
+        {
+            OnPressed?.Invoke(_action);
+            Log($"Event.{nameof(SimulatePointerDown)}");
+        }
+
+        public void SimulatePointerUp()
+        {
+            OnReleased?.Invoke(_action);
+            Log($"Event.{nameof(SimulatePointerUp)}");
+        }
+
 
         private void Log(string message)
         {
