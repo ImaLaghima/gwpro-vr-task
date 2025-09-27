@@ -42,6 +42,18 @@ namespace VRTask.Crane.Controller
         [SerializeField]
         private GameObject _hookObject = null!;
 
+        [SerializeField]
+        private GameObject _hookMoveConstraintMin = null!;
+
+        [SerializeField]
+        private GameObject _hookMoveConstraintMax = null!;
+
+        [SerializeField]
+        private float _hookMoveSpeed = 3.7f;
+
+        [SerializeField]
+        private GameObject _hookWireObject = null!;
+
         private Coroutine? _moveCoroutine;
         private Vector3 _moveDirection = Vector3.zero;
 
@@ -80,12 +92,12 @@ namespace VRTask.Crane.Controller
 
         private void HandleUp()
         {
-
+            _moveDirection = Vector3.up;
         }
 
         private void HandleDown()
         {
-
+            _moveDirection = Vector3.down;
         }
 
         private void HandleWest()
@@ -154,6 +166,21 @@ namespace VRTask.Crane.Controller
                 _hookObject != null,
                 "[CraneController] CraneHook reference is missing!"
             );
+
+            Debug.Assert(
+                _beamMoveConstraintMin != null,
+                "[CraneController] Hook's MoveConstraintMin reference is missing!"
+            );
+
+            Debug.Assert(
+                _beamMoveConstraintMax != null,
+                "[CraneController] Hook's MoveConstraintMax reference is missing!"
+            );
+
+            Debug.Assert(
+                _hookWireObject != null,
+                "[CraneController] Hook's Wire reference is missing!"
+            );
         }
 
 
@@ -187,6 +214,33 @@ namespace VRTask.Crane.Controller
                     _beamObject.transform.position.y,
                     _beamObject.transform.position.z
                 );
+
+                float nextPositionY = _hookObject.transform.position.y +
+                                      (_hookMoveSpeed * Time.deltaTime * _moveDirection.y);
+                float clampedPositionY = Mathf.Clamp(
+                    nextPositionY,
+                    _hookMoveConstraintMin.transform.position.y,
+                    _hookMoveConstraintMax.transform.position.y
+                );
+                _hookObject.transform.position = new Vector3(
+                    _hookObject.transform.position.x,
+                    clampedPositionY,
+                    _hookObject.transform.position.z
+                );
+
+                _hookWireObject.transform.position = Vector3.Lerp(
+                    _beamObject.transform.position,
+                    _hookObject.transform.position,
+                    0.5f
+                );
+                float distanceToCover = Vector3.Distance(
+                    _beamObject.transform.position,
+                    _hookObject.transform.position
+                );
+                Vector3 adjustedWireScale = _hookWireObject.transform.localScale;
+                adjustedWireScale.y = distanceToCover * 0.5f;
+                _hookWireObject.transform.localScale = adjustedWireScale;
+
                 yield return null;
             }
         }
