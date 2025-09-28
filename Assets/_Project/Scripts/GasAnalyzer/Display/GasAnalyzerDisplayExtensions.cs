@@ -1,4 +1,4 @@
-using VRTask.GasAnalyzer.Common;
+using VRTask.GasAnalyzer.DangerZone;
 
 namespace VRTask.GasAnalyzer.Display
 {

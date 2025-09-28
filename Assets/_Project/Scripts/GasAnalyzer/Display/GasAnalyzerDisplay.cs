@@ -1,7 +1,7 @@
 using System.Globalization;
 using TMPro;
 using UnityEngine;
-using VRTask.GasAnalyzer.Common;
+using VRTask.GasAnalyzer.DangerZone;
 
 namespace VRTask.GasAnalyzer.Display
 {
@@ -20,6 +20,26 @@ namespace VRTask.GasAnalyzer.Display
 
         [SerializeField]
         private TextMeshPro _nearDangerZoneDistanceText = null!;
+
+        [SerializeField]
+        private GameObject? _visibleObjectsRoot;
+
+
+        private void Awake()
+        {
+            AssertInspectorRefsNotNull();
+        }
+
+
+        public void Activate()
+        {
+            _visibleObjectsRoot?.SetActive(true);
+        }
+
+        public void Deactivate()
+        {
+            _visibleObjectsRoot?.SetActive(false);
+        }
 
 
         public void UpdateZonesDetected(int dangerZonesDetected)
