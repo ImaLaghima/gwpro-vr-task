@@ -112,12 +112,12 @@ namespace VRTask.Crane.Controller
 
         private void HandleNorth()
         {
-            _moveDirection = Vector3.forward;
+            _moveDirection = Vector3.back;
         }
 
         private void HandleSouth()
         {
-            _moveDirection = Vector3.back;
+            _moveDirection = Vector3.forward;
         }
 
         private void HandleStop()
