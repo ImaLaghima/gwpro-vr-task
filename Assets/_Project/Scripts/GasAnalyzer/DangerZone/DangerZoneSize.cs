@@ -1,4 +1,4 @@
-namespace VRTask.GasAnalyzer.Common
+namespace VRTask.GasAnalyzer.DangerZone
 {
     public enum DangerZoneSize
     {
