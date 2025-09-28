@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -22,6 +23,7 @@ namespace VRTask.GasAnalyzer.Probe
         private UnityEvent<DangerZoneIdentity> _onDangerZoneExit = new();
 
         private readonly Dictionary<DangerZoneIdentity, float> _dangerZones = new();
+        private Coroutine? _updateCoroutine;
 
 
         public bool IsLogging => _isLogging;
@@ -36,19 +38,22 @@ namespace VRTask.GasAnalyzer.Probe
             AssertInspectorRefsNotNull();
         }
 
-        private void Update()
+
+        public void Activate()
         {
-            // TODO: change calculation method to the ray casting
-            foreach (DangerZoneIdentity key in _dangerZones.Keys.ToList())
+            if (_updateCoroutine == null)
             {
-                float renewedDistance = Vector3.Distance(
-                    transform.position,
-                    key.transform.position
-                );
-                _dangerZones[key] = renewedDistance;
+                _updateCoroutine = StartCoroutine(UpdateCoroutine());
             }
         }
 
+        public void Deactivate()
+        {
+            if (_updateCoroutine != null)
+            {
+                StopCoroutine(_updateCoroutine);
+            }
+        }
 
         public IReadOnlyDictionary<DangerZoneIdentity, float> GetDangerZones()
         {
@@ -103,6 +108,25 @@ namespace VRTask.GasAnalyzer.Probe
             if (IsLogging)
             {
                 Debug.Log($"[ProbeBehavior] {message}");
+            }
+        }
+
+
+        private IEnumerator UpdateCoroutine()
+        {
+            while (true)
+            {
+                // TODO: change calculation method to the ray casting so that
+                // distance will be calculated to the edge, not to the center
+                foreach (DangerZoneIdentity key in _dangerZones.Keys.ToList())
+                {
+                    float renewedDistance = Vector3.Distance(
+                        transform.position,
+                        key.transform.position
+                    );
+                    _dangerZones[key] = renewedDistance;
+                }
+                yield return null;
             }
         }
     }
