@@ -48,9 +48,13 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 588482353532545404, guid: ccd54bae46afb3640b0d08c3f54305e0, type: 3}
+      propertyPath: m_text
+      value: /\
+      objectReference: {fileID: 0}
     - target: {fileID: 3633612273277281106, guid: ccd54bae46afb3640b0d08c3f54305e0, type: 3}
       propertyPath: m_Name
-      value: RemoteControllerButton_Up
+      value: PanelButton_Up
       objectReference: {fileID: 0}
     - target: {fileID: 8322662958761156428, guid: ccd54bae46afb3640b0d08c3f54305e0, type: 3}
       propertyPath: _action
