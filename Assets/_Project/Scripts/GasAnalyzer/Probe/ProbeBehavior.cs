@@ -52,6 +52,7 @@ namespace VRTask.GasAnalyzer.Probe
             if (_updateCoroutine != null)
             {
                 StopCoroutine(_updateCoroutine);
+                _updateCoroutine = null;
             }
         }
 
