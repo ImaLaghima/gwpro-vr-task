@@ -584,7 +584,7 @@ MonoBehaviour:
     power button to turn it on.
 
 
-    The Probe monitors the hazardousareas within
+    The Probe monitors the Danger Zones (Red) within
     a radius of 50 and reports the received data to the controller, including
 
 
