@@ -181,6 +181,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6430238872154665588, guid: a617d50588e2d0d4bbbed2d49897ae96, type: 3}
   m_PrefabInstance: {fileID: 183666345}
   m_PrefabAsset: {fileID: 0}
+--- !u!82 &263834837 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 7970499656167511214, guid: 10906da09ebe1404fbdb043b14faaaed, type: 3}
+  m_PrefabInstance: {fileID: 1809743656396395148}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &330585543
 GameObject:
   m_ObjectHideFlags: 0
@@ -1562,6 +1567,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4337885782575209411, guid: 10906da09ebe1404fbdb043b14faaaed, type: 3}
+      propertyPath: _rotationAudioSource
+      value: 
+      objectReference: {fileID: 263834837}
     - target: {fileID: 4878825411619302990, guid: 10906da09ebe1404fbdb043b14faaaed, type: 3}
       propertyPath: m_Name
       value: Hangar_Reworked
@@ -1569,7 +1578,25 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8627944550059777331, guid: 10906da09ebe1404fbdb043b14faaaed, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
+    - targetCorrespondingSourceObject: {fileID: 4988089363279689830, guid: 10906da09ebe1404fbdb043b14faaaed, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
+    - targetCorrespondingSourceObject: {fileID: 1084732955833356133, guid: 10906da09ebe1404fbdb043b14faaaed, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
+    - targetCorrespondingSourceObject: {fileID: 4845638398622068887, guid: 10906da09ebe1404fbdb043b14faaaed, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
+    - targetCorrespondingSourceObject: {fileID: 1707641504108166623, guid: 10906da09ebe1404fbdb043b14faaaed, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
+    - targetCorrespondingSourceObject: {fileID: 9069915415045854339, guid: 10906da09ebe1404fbdb043b14faaaed, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: 10906da09ebe1404fbdb043b14faaaed, type: 3}
 --- !u!1001 &2166948995329643991
 PrefabInstance:
