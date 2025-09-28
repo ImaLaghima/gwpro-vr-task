@@ -1579,6 +1579,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2705719742673849314, guid: 75f394817b911dd45bf02a2dc6ee7371, type: 3}
+      propertyPath: m_Type
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2705719742673849314, guid: 75f394817b911dd45bf02a2dc6ee7371, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 4469933325251500820, guid: 75f394817b911dd45bf02a2dc6ee7371, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -1611,6 +1619,14 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 374003378}
+    - target: {fileID: 6794880910795355327, guid: 75f394817b911dd45bf02a2dc6ee7371, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8674459048679517816, guid: 75f394817b911dd45bf02a2dc6ee7371, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 9020646665136670271, guid: 75f394817b911dd45bf02a2dc6ee7371, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -1715,11 +1731,83 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 2705719742673849314, guid: 75f394817b911dd45bf02a2dc6ee7371, type: 3}
+    - {fileID: 8599677695877799125, guid: 75f394817b911dd45bf02a2dc6ee7371, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 950655328656841182, guid: 75f394817b911dd45bf02a2dc6ee7371, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2166948995329643993}
+    - targetCorrespondingSourceObject: {fileID: 4593204077869720045, guid: 75f394817b911dd45bf02a2dc6ee7371, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2166948995329643995}
   m_SourcePrefab: {fileID: 100100000, guid: 75f394817b911dd45bf02a2dc6ee7371, type: 3}
+--- !u!1 &2166948995329643992 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 950655328656841182, guid: 75f394817b911dd45bf02a2dc6ee7371, type: 3}
+  m_PrefabInstance: {fileID: 2166948995329643991}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2166948995329643993
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2166948995329643992}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1344c3c82d62a2a41a3576d8abb8e3ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.RawImage
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Texture: {fileID: 8400000, guid: 1c4857f6e4d053f449a41fd4fe5e4b48, type: 2}
+  m_UVRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1
+    height: 1
+--- !u!1 &2166948995329643994 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4593204077869720045, guid: 75f394817b911dd45bf02a2dc6ee7371, type: 3}
+  m_PrefabInstance: {fileID: 2166948995329643991}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2166948995329643995
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2166948995329643994}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1344c3c82d62a2a41a3576d8abb8e3ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.RawImage
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Texture: {fileID: 8400000, guid: 1d48e8ffa219c9f458daa0120cf7cba7, type: 2}
+  m_UVRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1
+    height: 1
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
