@@ -34,7 +34,6 @@ namespace VRTask.GasAnalyzer.Controller
 
         public bool IsLogging => _isLogging;
         public GasAnalyzerState State { get; private set; }
-            = GasAnalyzerState.Inactive;
 
 
         private void Awake()
@@ -48,12 +47,18 @@ namespace VRTask.GasAnalyzer.Controller
             _powerButton.OnReleased += PowerOff;
         }
 
+        private void Start()
+        {
+            State = GasAnalyzerState.Inactive;
+            _display.Deactivate();
+            _probeBehavior.Deactivate();
+        }
+
         private void OnDisable()
         {
             _powerButton.OnPressed -= PowerOn;
             _powerButton.OnReleased -= PowerOff;
         }
-
 
 
         public void PowerOn()
@@ -101,24 +106,27 @@ namespace VRTask.GasAnalyzer.Controller
             }
         }
 
-        private void SwitchState()
+        private void ToggleState()
         {
+            _powerCoroutine = null;
+
             if (State == GasAnalyzerState.Inactive)
             {
-                State = GasAnalyzerState.Active;
-                _powerCoroutine = null;
+                _display.Activate();
+                _probeBehavior.Activate();
                 _updateCoroutine = StartCoroutine(UpdateCoroutine());
-                // activate display
-                // activate probe
+
+                State = GasAnalyzerState.Active;
                 Log(State.ToString());
             }
+
             else if (State == GasAnalyzerState.Active)
             {
-                State = GasAnalyzerState.Inactive;
-                _powerCoroutine = null;
                 StopCoroutine(_updateCoroutine);
-                // deactivate display
-                // deactivate probe
+                _probeBehavior.Deactivate();
+                _display.Deactivate();
+
+                State = GasAnalyzerState.Inactive;
                 Log(State.ToString());
             }
         }
@@ -127,7 +135,7 @@ namespace VRTask.GasAnalyzer.Controller
         private IEnumerator PowerCoroutine()
         {
             yield return new WaitForSeconds(_powerDelaySeconds);
-            SwitchState();
+            ToggleState();
         }
 
         private IEnumerator UpdateCoroutine()
