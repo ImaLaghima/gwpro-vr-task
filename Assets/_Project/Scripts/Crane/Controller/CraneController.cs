@@ -15,46 +15,45 @@ namespace VRTask.Crane.Controller
         [Header("Beam Holder (BH)")]
         [SerializeField]
         private GameObject _bhObject = null!;
-
         [SerializeField]
         private GameObject _bhMoveConstraintMin = null!;
-
         [SerializeField]
         private GameObject _bhMoveConstraintMax = null!;
-
         [SerializeField]
         private float _bhMoveSpeed = 3.7f;
 
         [Header("Beam")]
         [SerializeField]
         private GameObject _beamObject = null!;
-
         [SerializeField]
         private GameObject _beamMoveConstraintMin = null!;
-
         [SerializeField]
         private GameObject _beamMoveConstraintMax = null!;
-
         [SerializeField]
         private float _beamMoveSpeed = 3.7f;
 
         [Header("Hook")]
         [SerializeField]
         private GameObject _hookObject = null!;
-
         [SerializeField]
         private GameObject _hookMoveConstraintMin = null!;
-
         [SerializeField]
         private GameObject _hookMoveConstraintMax = null!;
-
         [SerializeField]
         private float _hookMoveSpeed = 3.7f;
-
         [SerializeField]
         private GameObject _hookWireObject = null!;
 
+        [Header("Additional Extra")]
+        [SerializeField]
+        private GameObject? _tube;
+        [SerializeField]
+        private AudioSource? _rotationAudioSource;
+        [SerializeField]
+        private float _tubeRotationSpeed = 3.7f;
+
         private Coroutine? _moveCoroutine;
+        private Coroutine? _tubeRotationCoroutine;
         private Vector3 _moveDirection = Vector3.zero;
 
 
@@ -93,11 +92,31 @@ namespace VRTask.Crane.Controller
         private void HandleUp()
         {
             _moveDirection = Vector3.up;
+            if (_tubeRotationCoroutine == null)
+            {
+                _tubeRotationCoroutine = StartCoroutine(
+                    TubeRotationCoroutine(isReversed: true)
+                );
+            }
+            if (_rotationAudioSource != null)
+            {
+                _rotationAudioSource.Play();
+            }
         }
 
         private void HandleDown()
         {
             _moveDirection = Vector3.down;
+            if (_tubeRotationCoroutine == null)
+            {
+                _tubeRotationCoroutine = StartCoroutine(
+                    TubeRotationCoroutine()
+                );
+            }
+            if (_rotationAudioSource != null)
+            {
+                _rotationAudioSource.Play();
+            }
         }
 
         private void HandleWest()
@@ -112,17 +131,26 @@ namespace VRTask.Crane.Controller
 
         private void HandleNorth()
         {
-            _moveDirection = Vector3.forward;
+            _moveDirection = Vector3.back;
         }
 
         private void HandleSouth()
         {
-            _moveDirection = Vector3.back;
+            _moveDirection = Vector3.forward;
         }
 
         private void HandleStop()
         {
             _moveDirection = Vector3.zero;
+            if (_tubeRotationCoroutine != null)
+            {
+                StopCoroutine(_tubeRotationCoroutine);
+                _tubeRotationCoroutine = null;
+            }
+            if (_rotationAudioSource != null)
+            {
+                _rotationAudioSource?.Pause();
+            }
         }
 
         private void AssertInspectorRefsNotNull()
@@ -241,6 +269,23 @@ namespace VRTask.Crane.Controller
                 adjustedWireScale.y = distanceToCover * 0.5f;
                 _hookWireObject.transform.localScale = adjustedWireScale;
 
+                yield return null;
+            }
+        }
+
+        private IEnumerator TubeRotationCoroutine(bool isReversed = false)
+        {
+            if (_tube == null)
+            {
+                yield break;
+            }
+
+            float multiplier = isReversed ? -1 : 1;
+            float rotationSpeed = _tubeRotationSpeed * multiplier;
+
+            while (true)
+            {
+                _tube.transform.Rotate(Vector3.right, rotationSpeed);
                 yield return null;
             }
         }
