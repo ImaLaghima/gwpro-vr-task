@@ -12,21 +12,21 @@ namespace VRTask.GasAnalyzer.Controller
     [DisallowMultipleComponent]
     public class GasAnalyzerController : MonoBehaviour
     {
+        private static readonly int _emissionColor = Shader.PropertyToID("_EmissionColor");
+
         [Header("Gas Analyzer Controller")]
         [SerializeField]
         private bool _isLogging = true;
-
         [SerializeField]
         private ProbeBehavior _probeBehavior = null!;
-
         [SerializeField]
         private GasAnalyzerDisplay _display = null!;
-
         [SerializeField]
         private PowerButton _powerButton = null!;
-
         [SerializeField]
         private float _powerDelaySeconds = 3.0f;
+        [SerializeField]
+        private Renderer _powerSwitchIndicator = null!;
 
         private Coroutine? _powerCoroutine;
         private Coroutine? _updateCoroutine;
@@ -96,6 +96,11 @@ namespace VRTask.GasAnalyzer.Controller
                 _powerButton != null,
                 "[GasAnalyzerController] Power Button reference is missing!"
             );
+
+            Debug.Assert(
+                _powerSwitchIndicator != null,
+                "[GasAnalyzerController] Power Switch Indicator reference is missing!"
+            );
         }
 
         private void Log(string message)
@@ -134,7 +139,27 @@ namespace VRTask.GasAnalyzer.Controller
 
         private IEnumerator PowerCoroutine()
         {
-            yield return new WaitForSeconds(_powerDelaySeconds);
+            Material indicatorMaterial = _powerSwitchIndicator.material;
+            indicatorMaterial.EnableKeyword("_EMISSION");
+
+            const float intensityFrom = 0;
+            const float intensityTo = 10;
+            float time = 0f;
+
+            Color baseColor = indicatorMaterial.GetColor(_emissionColor);
+
+            while (time < _powerDelaySeconds)
+            {
+                time += Time.deltaTime;
+                float t = time / _powerDelaySeconds;
+                float intensity = Mathf.Lerp(intensityFrom, intensityTo, t);
+                Color finalColor = baseColor * intensity;
+                indicatorMaterial.SetColor(_emissionColor, finalColor);
+
+                yield return null;
+            }
+
+            indicatorMaterial.SetColor(_emissionColor, baseColor);
             ToggleState();
         }
 
