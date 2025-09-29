@@ -11,16 +11,12 @@ namespace VRTask.GasAnalyzer.Display
         [Header("Gas Analyzer Display")]
         [SerializeField]
         private TextMeshPro _dangerZonesDetectedText = null!;
-
         [SerializeField]
         private TextMeshPro _nearDangerZoneSizeText = null!;
-
         [SerializeField]
         private TextMeshPro _nearDangerZoneIdText = null!;
-
         [SerializeField]
         private TextMeshPro _nearDangerZoneDistanceText = null!;
-
         [SerializeField]
         private GameObject? _visibleObjectsRoot;
 

@@ -8,36 +8,30 @@ namespace VRTask.Crane.RemoteController
     [DisallowMultipleComponent]
     public class CraneRemoteController : MonoBehaviour
     {
+        [Header("Crane Remote Controller")]
         [SerializeField]
         private bool _isLogging = true;
-
         [SerializeField]
         private InputProviderBase _inputProvider = null!;
+
+        [SerializeField]
+        private UnityEvent _onUp = new();
+        [SerializeField]
+        private UnityEvent _onDown = new();
+        [SerializeField]
+        private UnityEvent _onWest = new();
+        [SerializeField]
+        private UnityEvent _onEast = new();
+        [SerializeField]
+        private UnityEvent _onNorth = new();
+        [SerializeField]
+        private UnityEvent _onSouth = new();
+        [SerializeField]
+        private UnityEvent _onActiveStopped = new();
 
 
         public bool IsLogging => _isLogging;
 
-
-        [SerializeField]
-        private UnityEvent _onUp = new();
-
-        [SerializeField]
-        private UnityEvent _onDown = new();
-
-        [SerializeField]
-        private UnityEvent _onWest = new();
-
-        [SerializeField]
-        private UnityEvent _onEast = new();
-
-        [SerializeField]
-        private UnityEvent _onNorth = new();
-
-        [SerializeField]
-        private UnityEvent _onSouth = new();
-
-        [SerializeField]
-        private UnityEvent _onActiveStopped = new();
 
         public UnityEvent OnUp => _onUp;
         public UnityEvent OnDown => _onDown;

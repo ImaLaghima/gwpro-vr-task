@@ -11,19 +11,14 @@ namespace VRTask.Crane.InputProvider
         [Header("Input Keys")]
         [SerializeField]
         private KeyCode _keyUp = KeyCode.Keypad9;
-
         [SerializeField]
         private KeyCode _keyDown = KeyCode.Keypad7;
-
         [SerializeField]
         private KeyCode _keyWest = KeyCode.Keypad6;
-
         [SerializeField]
         private KeyCode _keyEast = KeyCode.Keypad4;
-
         [SerializeField]
         private KeyCode _keyNorth = KeyCode.Keypad5;
-
         [SerializeField]
         private KeyCode _keySouth = KeyCode.Keypad8;
 
@@ -36,7 +31,6 @@ namespace VRTask.Crane.InputProvider
             {
                 StartActionWithLog(CraneAction.Up);
             }
-
             if (Input.GetKeyUp(_keyUp))
             {
                StopActionWithLog(CraneAction.Up);
@@ -48,7 +42,6 @@ namespace VRTask.Crane.InputProvider
             {
                 StartActionWithLog(CraneAction.Down);
             }
-
             if (Input.GetKeyUp(_keyDown))
             {
                 StopActionWithLog(CraneAction.Down);
@@ -60,7 +53,6 @@ namespace VRTask.Crane.InputProvider
             {
                 StartActionWithLog(CraneAction.West);
             }
-
             if (Input.GetKeyUp(_keyWest))
             {
                 StopActionWithLog(CraneAction.West);
@@ -72,7 +64,6 @@ namespace VRTask.Crane.InputProvider
             {
                 StartActionWithLog(CraneAction.East);
             }
-
             if (Input.GetKeyUp(_keyEast))
             {
                 StopActionWithLog(CraneAction.East);
@@ -84,7 +75,6 @@ namespace VRTask.Crane.InputProvider
             {
                 StartActionWithLog(CraneAction.North);
             }
-
             if (Input.GetKeyUp(_keyNorth))
             {
                 StopActionWithLog(CraneAction.North);
@@ -96,7 +86,6 @@ namespace VRTask.Crane.InputProvider
             {
                 StartActionWithLog(CraneAction.South);
             }
-
             if (Input.GetKeyUp(_keySouth))
             {
                 StopActionWithLog(CraneAction.South);
