@@ -12,13 +12,10 @@ namespace VRTask.GasAnalyzer.Probe
         [Header("Probe Behavior")]
         [SerializeField]
         private bool _isLogging = true;
-
         [SerializeField]
         private Collider _detectionCollider = null!;
-
         [SerializeField]
         private UnityEvent<DangerZoneIdentity> _onDangerZoneEnter = new();
-
         [SerializeField]
         private UnityEvent<DangerZoneIdentity> _onDangerZoneExit = new();
 

@@ -8,7 +8,6 @@ namespace VRTask.GasAnalyzer.DangerZone
     {
         [SerializeField]
         private DangerZoneSize _size = DangerZoneSize.Unset;
-
         [SerializeField]
         private int _id;
 
