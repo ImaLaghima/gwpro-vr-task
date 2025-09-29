@@ -53,8 +53,10 @@ namespace VRTask.Crane.Controller
         private float _tubeRotationSpeed = 3.7f;
 
         private Coroutine? _moveCoroutine;
-        private Coroutine? _tubeRotationCoroutine;
-        private Vector3 _moveDirection = Vector3.zero;
+        private Coroutine? _tubeRotateCoroutine;
+
+
+        private event Action? _OnStopHandled;
 
 
         private void Awake()
@@ -71,8 +73,6 @@ namespace VRTask.Crane.Controller
             _remoteController.OnNorth.AddListener(HandleNorth);
             _remoteController.OnSouth.AddListener(HandleSouth);
             _remoteController.OnActiveStopped.AddListener(HandleStop);
-
-            _moveCoroutine = StartCoroutine(MoveCoroutine());
         }
 
         private void OnDisable()
@@ -85,73 +85,9 @@ namespace VRTask.Crane.Controller
             _remoteController.OnSouth.RemoveListener(HandleSouth);
             _remoteController.OnActiveStopped.AddListener(HandleStop);
 
-            StopCoroutine(_moveCoroutine);
+            _OnStopHandled = null;
         }
 
-
-        private void HandleUp()
-        {
-            _moveDirection = Vector3.up;
-            if (_tubeRotationCoroutine == null)
-            {
-                _tubeRotationCoroutine = StartCoroutine(
-                    TubeRotationCoroutine(isReversed: true)
-                );
-            }
-            if (_rotationAudioSource != null)
-            {
-                _rotationAudioSource.Play();
-            }
-        }
-
-        private void HandleDown()
-        {
-            _moveDirection = Vector3.down;
-            if (_tubeRotationCoroutine == null)
-            {
-                _tubeRotationCoroutine = StartCoroutine(
-                    TubeRotationCoroutine()
-                );
-            }
-            if (_rotationAudioSource != null)
-            {
-                _rotationAudioSource.Play();
-            }
-        }
-
-        private void HandleWest()
-        {
-            _moveDirection = Vector3.right;
-        }
-
-        private void HandleEast()
-        {
-            _moveDirection = Vector3.left;
-        }
-
-        private void HandleNorth()
-        {
-            _moveDirection = Vector3.back;
-        }
-
-        private void HandleSouth()
-        {
-            _moveDirection = Vector3.forward;
-        }
-
-        private void HandleStop()
-        {
-            _moveDirection = Vector3.zero;
-            if (_tubeRotationCoroutine != null)
-            {
-                StopCoroutine(_tubeRotationCoroutine);
-                _tubeRotationCoroutine = null;
-            }
-            if (_rotationAudioSource != null)
-            {
-                _rotationAudioSource?.Pause();
-            }
-        }
 
         private void AssertInspectorRefsNotNull()
         {
@@ -159,66 +95,159 @@ namespace VRTask.Crane.Controller
                 _remoteController != null,
                 "[CraneController] RemoteController reference is missing!"
             );
-
             Debug.Assert(
                 _bhObject != null,
                 "[CraneController] BeamHolder reference is missing!"
             );
-
             Debug.Assert(
                 _bhMoveConstraintMin != null,
                 "[CraneController] BeamHolder's MoveConstraintMin reference is missing!"
             );
-
             Debug.Assert(
                 _bhMoveConstraintMax != null,
                 "[CraneController] BeamHolder's MoveConstraintMax reference is missing!"
             );
-
             Debug.Assert(
                 _beamObject != null,
                 "[CraneController] Beam reference is missing!"
             );
-
             Debug.Assert(
                 _beamMoveConstraintMin != null,
                 "[CraneController] Beam's MoveConstraintMin reference is missing!"
             );
-
             Debug.Assert(
                 _beamMoveConstraintMax != null,
                 "[CraneController] Beam's MoveConstraintMax reference is missing!"
             );
-
             Debug.Assert(
                 _hookObject != null,
                 "[CraneController] CraneHook reference is missing!"
             );
-
             Debug.Assert(
                 _beamMoveConstraintMin != null,
                 "[CraneController] Hook's MoveConstraintMin reference is missing!"
             );
-
             Debug.Assert(
                 _beamMoveConstraintMax != null,
                 "[CraneController] Hook's MoveConstraintMax reference is missing!"
             );
-
             Debug.Assert(
                 _hookWireObject != null,
                 "[CraneController] Hook's Wire reference is missing!"
             );
         }
 
-
-        private IEnumerator MoveCoroutine()
+        private void HandleUp()
         {
-            // TODO: fix coroutine: prevent infinite work
+            HandleMoveStart(Vector3.up);
+        }
+
+        private void HandleDown()
+        {
+            HandleMoveStart(Vector3.down);
+        }
+
+        private void HandleWest()
+        {
+            HandleMoveStart(Vector3.right);
+        }
+
+        private void HandleEast()
+        {
+            HandleMoveStart(Vector3.left);
+        }
+
+        private void HandleNorth()
+        {
+            HandleMoveStart(Vector3.back);
+        }
+
+        private void HandleSouth()
+        {
+            HandleMoveStart(Vector3.forward);
+        }
+
+        private void HandleStop()
+        {
+            HandleMoveStop();
+        }
+
+        private void HandleMoveStart(Vector3 direction)
+        {
+            if (_moveCoroutine != null)
+            {
+                return;
+            }
+
+            // Assume only one axis is not a zero
+            if (direction.z != 0)
+            {
+                _moveCoroutine = StartCoroutine(MoveBeamHolderCoroutine(direction));
+            }
+            else if (direction.x != 0)
+            {
+                _moveCoroutine = StartCoroutine(MoveBeamCoroutine(direction));
+            }
+            else if (direction.y != 0)
+            {
+                _moveCoroutine = StartCoroutine(MoveHookCoroutine(direction));
+                StartTubeRotation(direction);
+            }
+        }
+
+        private void StartTubeRotation(Vector3 direction)
+        {
+            if (direction.y == 0)
+            {
+                return;
+            }
+
+            if (_tubeRotateCoroutine == null)
+            {
+                _tubeRotateCoroutine = StartCoroutine(
+                    TubeRotateCoroutine(isReversed: direction.y > 0)
+                );
+                _OnStopHandled += () =>
+                {
+                    StopCoroutine(_tubeRotateCoroutine);
+                };
+            }
+
+            if (_rotationAudioSource != null)
+            {
+                _rotationAudioSource.Play();
+                _OnStopHandled += () =>
+                {
+                    _rotationAudioSource.Stop();
+                };
+            }
+        }
+
+        private void HandleMoveStop()
+        {
+            if (_moveCoroutine == null)
+            {
+                return;
+            }
+
+            StopCoroutine(_moveCoroutine);
+            _moveCoroutine = null;
+            _OnStopHandled?.Invoke();
+            _OnStopHandled = null;
+        }
+
+
+        private IEnumerator MoveBeamHolderCoroutine(Vector3 direction)
+        {
+            if (direction.z == 0)
+            {
+                yield break;
+            }
+
             while (true)
             {
                 float nextPositionZ = _bhObject.transform.localPosition.z +
-                                     (_bhMoveSpeed * Time.deltaTime * _moveDirection.z);
+                                      (_bhMoveSpeed * Time.deltaTime * direction.z);
                 float clampedPositionZ = Mathf.Clamp(
                     nextPositionZ,
                     _bhMoveConstraintMin.transform.localPosition.z,
@@ -230,8 +259,21 @@ namespace VRTask.Crane.Controller
                     clampedPositionZ
                 );
 
+                yield return null;
+            }
+        }
+
+        private IEnumerator MoveBeamCoroutine(Vector3 direction)
+        {
+            if (direction.x == 0)
+            {
+                yield break;
+            }
+
+            while (true)
+            {
                 float nextPositionX = _beamObject.transform.localPosition.x +
-                                      (_beamMoveSpeed * Time.deltaTime * _moveDirection.x);
+                                      (_beamMoveSpeed * Time.deltaTime * direction.x);
                 float clampedPositionX = Mathf.Clamp(
                     nextPositionX,
                     _beamMoveConstraintMin.transform.localPosition.x,
@@ -243,8 +285,21 @@ namespace VRTask.Crane.Controller
                     _beamObject.transform.localPosition.z
                 );
 
+                yield return null;
+            }
+        }
+
+        private IEnumerator MoveHookCoroutine(Vector3 direction)
+        {
+            if (direction.y == 0)
+            {
+                yield break;
+            }
+
+            while (true)
+            {
                 float nextPositionY = _hookObject.transform.localPosition.y +
-                                      (_hookMoveSpeed * Time.deltaTime * _moveDirection.y);
+                                      (_hookMoveSpeed * Time.deltaTime * direction.y);
                 float clampedPositionY = Mathf.Clamp(
                     nextPositionY,
                     _hookMoveConstraintMin.transform.localPosition.y,
@@ -273,7 +328,7 @@ namespace VRTask.Crane.Controller
             }
         }
 
-        private IEnumerator TubeRotationCoroutine(bool isReversed = false)
+        private IEnumerator TubeRotateCoroutine(bool isReversed = false)
         {
             if (_tube == null)
             {
